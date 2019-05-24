@@ -10,7 +10,30 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
-  // List<Icon> scoreKeeper = [];
+  List<Icon> scoreKeeper = [];
+
+  void _checkAnswer(bool userPickedAnswer) {
+    bool correctAnswer = quizLogic.getCorrectAnswer();
+    setState(() {
+      if (userPickedAnswer == correctAnswer) {
+        scoreKeeper.add(
+          Icon(
+            Icons.check,
+            color: Colors.green,
+          ),
+        );
+      } else {
+        scoreKeeper.add(
+          Icon(
+            Icons.close,
+            color: Colors.red,
+          ),
+        );
+      }
+
+      quizLogic.nextQuestion();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,25 +71,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                bool correctAnswer = quizLogic.getCorrectAnswer();
-                if (correctAnswer == true) {
-                  /* scoreKeeper.add(
-                      Icon(
-                        Icons.check,
-                        color: Colors.green,
-                      ),
-                    );*/
-                } else {
-                  /*scoreKeeper.add(
-                      Icon(
-                        Icons.close,
-                        color: Colors.red,
-                      ),
-                    );*/
-                }
-                setState(() {
-                  quizLogic.nextQuestion();
-                });
+                _checkAnswer(true);
               },
             ),
           ),
@@ -84,33 +89,14 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                bool correctAnswer = quizLogic.getCorrectAnswer();
-
-                if (correctAnswer == false) {
-                  /* scoreKeeper.add(
-                      Icon(
-                        Icons.check,
-                        color: Colors.green,
-                      ),
-                    );*/
-                } else {
-                  /*scoreKeeper.add(
-                      Icon(
-                        Icons.close,
-                        color: Colors.red,
-                      ),
-                    );*/
-                }
-                setState(() {
-                  quizLogic.nextQuestion();
-                });
+                _checkAnswer(false);
               },
             ),
           ),
         ),
-        /*Row(
+        Row(
           children: scoreKeeper,
-        ),*/
+        ),
       ],
     );
   }
