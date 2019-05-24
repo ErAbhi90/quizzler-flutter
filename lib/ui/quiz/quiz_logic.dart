@@ -44,4 +44,16 @@ class QuizLogic {
   bool getCorrectAnswer() {
     return _questionBank[_questionNumber].correctAnswer;
   }
+
+  bool quizFinished() {
+    if (_questionNumber == _questionBank.length - 1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  int resetQuiz() {
+    return _questionNumber = 0;
+  }
 }
