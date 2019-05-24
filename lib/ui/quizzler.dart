@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quizzler/ui/quiz_page.dart';
+import 'package:quizzler/ui/quiz/quiz_page.dart';
 
 class Quizzler extends StatelessWidget {
   @override

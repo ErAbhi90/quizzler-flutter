@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 
+import 'quiz_logic.dart';
+
+QuizLogic quizLogic = QuizLogic();
+
 class QuizPage extends StatefulWidget {
   @override
   _QuizPageState createState() => _QuizPageState();
 }
 
 class _QuizPageState extends State<QuizPage> {
-  List<Icon> scoreKeeper = [];
+  // List<Icon> scoreKeeper = [];
+
+  int questionNumber = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +26,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                'This is where the question text will go.',
+                quizLogic.questionBank[questionNumber].questionText,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -44,13 +50,24 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
+                bool correctAnswer = quizLogic.questionBank[questionNumber].correctAnswer;
+                if (correctAnswer == true) {
+                  /* scoreKeeper.add(
+                      Icon(
+                        Icons.check,
+                        color: Colors.green,
+                      ),
+                    );*/
+                } else {
+                  /*scoreKeeper.add(
+                      Icon(
+                        Icons.close,
+                        color: Colors.red,
+                      ),
+                    );*/
+                }
                 setState(() {
-                  scoreKeeper.add(
-                    Icon(
-                      Icons.check,
-                      color: Colors.green,
-                    ),
-                  );
+                  questionNumber++;
                 });
               },
             ),
@@ -69,21 +86,33 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
+                bool correctAnswer = quizLogic.questionBank[questionNumber].correctAnswer;
+
+                if (correctAnswer == false) {
+                  /* scoreKeeper.add(
+                      Icon(
+                        Icons.check,
+                        color: Colors.green,
+                      ),
+                    );*/
+                } else {
+                  /*scoreKeeper.add(
+                      Icon(
+                        Icons.close,
+                        color: Colors.red,
+                      ),
+                    );*/
+                }
                 setState(() {
-                  scoreKeeper.add(
-                    Icon(
-                      Icons.close,
-                      color: Colors.red,
-                    ),
-                  );
+                  questionNumber++;
                 });
               },
             ),
           ),
         ),
-        Row(
+        /*Row(
           children: scoreKeeper,
-        )
+        ),*/
       ],
     );
   }
