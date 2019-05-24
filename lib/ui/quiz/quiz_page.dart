@@ -12,8 +12,6 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   // List<Icon> scoreKeeper = [];
 
-  int questionNumber = 0;
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -26,7 +24,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                quizLogic.questionBank[questionNumber].questionText,
+                quizLogic.getQuestionText(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -50,7 +48,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                bool correctAnswer = quizLogic.questionBank[questionNumber].correctAnswer;
+                bool correctAnswer = quizLogic.getCorrectAnswer();
                 if (correctAnswer == true) {
                   /* scoreKeeper.add(
                       Icon(
@@ -67,7 +65,7 @@ class _QuizPageState extends State<QuizPage> {
                     );*/
                 }
                 setState(() {
-                  questionNumber++;
+                  quizLogic.nextQuestion();
                 });
               },
             ),
@@ -86,7 +84,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                bool correctAnswer = quizLogic.questionBank[questionNumber].correctAnswer;
+                bool correctAnswer = quizLogic.getCorrectAnswer();
 
                 if (correctAnswer == false) {
                   /* scoreKeeper.add(
@@ -104,7 +102,7 @@ class _QuizPageState extends State<QuizPage> {
                     );*/
                 }
                 setState(() {
-                  questionNumber++;
+                  quizLogic.nextQuestion();
                 });
               },
             ),
